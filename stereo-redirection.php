@@ -38,15 +38,11 @@ if (!class_exists('ST_Redirection')) {
 
             public function register_option_pages()
             {
-                register_post_type($this->post_type, [
-                    'labels' => [
-                        'name' => __('Redirection Stereo','stereo-redirection'),
-                        'singular_name' => __('Redirection Stereo','stereo-redirection')
-                    ],
-                    'show_ui' => true,
-                    'rewrite' => false,
-                    'supports' => array('title')
-                ]);
+                acf_add_options_sub_page(array(
+                    'page_title'  => __('Redirection Stereo'),
+                    'menu_title'  => __('Redirection Stereo'),
+                    'parent_slug' => 'tools.php',
+                ));
             }
         }
         new ST_Redirection();
