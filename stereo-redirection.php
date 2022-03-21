@@ -6,7 +6,7 @@
  * Author URI: https://www.stereo.ca/
  * Text Domain: stereo-redirection
  * Domain Path: /languages
- * Version: 2.0.17
+ * Version: 1.0.0
  * License:     0BSD
  *
  * Copyright (c) 2022 Stereo
@@ -40,7 +40,7 @@ if (!class_exists('ST_Redirection')) {
                 acf_add_options_sub_page(array(
                     'page_title'  => __('Stereo redirection plugin'),
                     'menu_title'  => __('Stereo redirection'),
-                    'parent_slug' => 'options-general',
+                    'parent_slug' => 'tools.php',
                 ));
             }
         }
