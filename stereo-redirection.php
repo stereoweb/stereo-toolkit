@@ -24,6 +24,7 @@ if (!class_exists('ST_Redirection')) {
         class ST_Redirection
         {
             var $version = "1.0.0";
+            var $post_type = "st_redirection";
 
             public function __construct()
             {
@@ -37,10 +38,15 @@ if (!class_exists('ST_Redirection')) {
 
             public function register_option_pages()
             {
-                acf_add_options_page(array(
-                    'page_title'  => __('Stereo redirection plugin'),
-                    'menu_title'  => __('Stereo redirection'),
-                ));
+                register_post_type($this->post_type, [
+                    'labels' => [
+                        'name' => __('Redirection Stereo','stereo-redirection'),
+                        'singular_name' => __('Redirection Stereo','stereo-redirection')
+                    ],
+                    'show_ui' => true,
+                    'rewrite' => false,
+                    'supports' => array('title')
+                ]);
             }
         }
         new ST_Redirection();
