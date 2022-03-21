@@ -21,7 +21,7 @@ if (!class_exists('ST_Redirection')) {
             include 'acf.php';
         }
 
-        class ST_ContactForm
+        class ST_Redirection
         {
             var $version = "1.0.0";
 
@@ -44,4 +44,10 @@ if (!class_exists('ST_Redirection')) {
                 ));
             }
         }
+        new ST_Redirection();
+
+        function stereo_redirection_load_plugin_textdomain() {
+            load_plugin_textdomain( 'stereo-redirection', FALSE, basename( dirname( __FILE__ ) ) . '/languages/' );
+        }
+        add_action( 'plugins_loaded', 'stereo_redirection_load_plugin_textdomain' );
 }
