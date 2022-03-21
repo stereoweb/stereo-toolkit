@@ -28,7 +28,7 @@ if (!class_exists('ST_Redirection')) {
 
             public function __construct()
             {
-
+                add_action('init', [$this, 'init']);
             }
 
             public function init()
