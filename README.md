@@ -1,10 +1,12 @@
 # Stereo Redirection
 
 Simple and quick redirection plugin for Wordpress to redirect old Url to new one.
-You need the sitemap of the old site. (Url or file)
 
 # Requirement
-<a href="https://www.advancedcustomfields.com/">ACF plugin</a>
+<ul>
+    <li><a href="https://www.advancedcustomfields.com/">ACF plugin</a></li>
+    <li>You need the sitemap of the old site. (Url or file) ex: <a href="https://stereo.ca/sitemap.xml">https://stereo.ca/sitemap.xml<a></li>
+</ul>
 
 # Instructions
 <ul>
