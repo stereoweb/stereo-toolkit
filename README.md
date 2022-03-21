@@ -4,8 +4,8 @@ Simple and quick redirection plugin for Wordpress to redirect old Url to new one
 
 # Requirement
 <ul>
-    <li><a href="https://www.advancedcustomfields.com/">ACF plugin</a></li>
-    <li>You need the sitemap of the old site. (Url or file) ex: <a href="https://stereo.ca/sitemap.xml">https://stereo.ca/sitemap.xml<a></li>
+    <li><a href="https://www.advancedcustomfields.com/" target="_blank">ACF plugin</a></li>
+    <li>You need the sitemap of the old site. (Url or file) ex: <a href="https://stereo.ca/sitemap.xml" target="_blank">https://stereo.ca/sitemap.xml<a></li>
 </ul>
 
 # Instructions

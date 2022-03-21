@@ -47,8 +47,8 @@ if (!class_exists('ST_Redirection')) {
         }
         new ST_Redirection();
 
-        /*function stereo_redirection_load_plugin_textdomain() {
+        function stereo_redirection_load_plugin_textdomain() {
             load_plugin_textdomain( 'stereo-redirection', FALSE, basename( dirname( __FILE__ ) ) . '/languages/' );
         }
-        add_action( 'plugins_loaded', 'stereo_redirection_load_plugin_textdomain' );*/
+        add_action( 'plugins_loaded', 'stereo_redirection_load_plugin_textdomain' );
 }
