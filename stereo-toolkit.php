@@ -118,13 +118,42 @@ if (!class_exists('ST_Toolkit')) {
             }
 
 
-            public function hook_warnings() {
-                // TODO: Check warnings which are :
-                // - wp_footer exists in footer.php
-                // - wp_head exists in header.php
-                // - wp_body_open exists in header.php
-                // - Site is indexable (if production)
-                // - Some site tags are in the database.
+            public function show_warnings() {
+                $basepath = get_template_directory();
+                $notices = [];
+                if (!strstr(file_get_contents($basepath.'/footer.php'),'wp_footer')) {
+                    $notices[] = '<div class="notice notice-warning is-dismissible">
+                         <p><strong>Erreur dans le thème : </strong> Votre fichier footer.php n\'inclue pas la fonction wp_footer!.</p>
+                     </div>';
+                }
+                if (!strstr(file_get_contents($basepath.'/header.php'),'wp_head')) {
+                    $notices[] = '<div class="notice notice-warning is-dismissible">
+                         <p><strong>Erreur dans le thème : </strong> Votre fichier header.php n\'inclue pas la fonction wp_head!.</p>
+                     </div>';
+                }
+                if (!strstr(file_get_contents($basepath.'/header.php'),'wp_body_open')) {
+                    $notices[] = '<div class="notice notice-warning is-dismissible">
+                         <p><strong>Erreur dans le thème : </strong> Votre fichier header.php n\'inclue pas la fonction wp_body_open!.</p>
+                     </div>';
+                }
+                if (defined('WP_ENV') && WP_ENV == 'production') {
+                    if (!get_field('blog_public','option')) {
+                        $notices[] = '<div class="notice notice-warning is-dismissible">
+                             <p><strong>Erreur d\'indexation : </strong> Votre site n\'est pas indexable présentement!</p>
+                         </div>';
+                     }
+                }
+                if (defined('WP_ENV') && WP_ENV != 'development') {
+                    $tags = get_field('stereo_sitetags','option');
+                    if (!$tags || count($tags) == 0) {
+                        $notices[] = '<div class="notice notice-warning is-dismissible">
+                             <p><strong>Erreur d\'indexation : </strong> Votre site n\'a aucun tracker présentement!</p>
+                         </div>';
+                     }
+                }
+
+                if (count($notices)) echo implode("\r\n",$notices);
+
             }
 
 
@@ -134,8 +163,8 @@ if (!class_exists('ST_Toolkit')) {
                 if (!wp_doing_ajax() && !is_admin() && !wp_is_json_request()) {
                     $this->hook_sitetags();
                 }
-                if (is_admin() && !wp_doing_ajax()) {
-                    $this->hook_warnings();
+                if (is_admin() && !wp_doing_ajax() && !wp_is_json_request()) {
+                    add_action('admin_notices',[$this,'show_warnings']);
                 }
             }
 
