@@ -27,7 +27,7 @@ if (!class_exists('ST_Toolkit')) {
             public function __construct()
             {
                 add_action('init', [$this, 'init']);
-                add_filter('pre_handle_404',[$this, 'process_redirects']);
+                add_filter('pre_handle_404',[$this, 'process_redirects'],1000,1); // Priority is 1000, so you can hook there BEFORE
 
             }
 
@@ -40,7 +40,8 @@ if (!class_exists('ST_Toolkit')) {
                         $hasCSV = true;
                     }
                 }
-                if ($rows = get_field('stereo_redirection','option') && count($rows)) {
+                $rows = get_field('stereo_redirection','option');
+                if ($rows && count($rows)) {
                     $hasRepeater = true;
                 }
 
@@ -85,12 +86,45 @@ if (!class_exists('ST_Toolkit')) {
             }
 
             public function hook_sitetags() {
-                // TODO
+                $tags = get_field('stereo_sitetags','option');
+                if ($tags && count($tags)) {
+                    $this->tags = [];
+                    foreach($tags as $row) {
+                        $this->tags[$row['stereo_location']][] = $row['stereo_tag'];
+                    }
+                    if ($this->tags['head'] && count($this->tags['head'])) {
 
+                        add_action('wp_head', [$this, 'wp_head']);
+                    }
+                    if ($this->tags['footer'] && count($this->tags['footer'])) {
+                        add_action('wp_footer', [$this, 'wp_footer']);
+                    }
+                    if ($this->tags['body'] && count($this->tags['body'])) {
+                        add_action('wp_body_open', [$this, 'wp_body_open']);
+                    }
+                }
             }
 
+            public function wp_head() {
+                echo implode("\r\n",$this->tags['head']);
+            }
+
+            public function wp_footer() {
+                echo implode("\r\n",$this->tags['footer']);
+            }
+
+            public function wp_body_open() {
+                echo implode("\r\n",$this->tags['body']);
+            }
+
+
             public function hook_warnings() {
-                // TODO
+                // TODO: Check warnings which are :
+                // - wp_footer exists in footer.php
+                // - wp_head exists in header.php
+                // - wp_body_open exists in header.php
+                // - Site is indexable (if production)
+                // - Some site tags are in the database.
             }
 
 
