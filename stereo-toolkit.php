@@ -136,7 +136,7 @@ if (!class_exists('ST_Toolkit')) {
                  </div>';
             }
             if (defined('WP_ENV') && WP_ENV == 'production') {
-                if (!get_field('blog_public','option')) {
+                if (!get_option('blog_public')) {
                     $notices[] = '<div class="notice notice-error is-dismissible">
                          <p><strong>Erreur d\'indexation : </strong> Votre site n\'est pas indexable présentement!</p>
                      </div>';
