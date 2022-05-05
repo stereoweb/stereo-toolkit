@@ -6,5 +6,5 @@ Stereo plugin to handle :
 
 # Requirement
 <ul>
-    <li><a href="https://www.advancedcustomfields.com/" target="_blank">ACF plugin</a></li>
+    <li><a href="https://www.advancedcustomfields.com/" target="_blank">ACF plugin (Pro version)</a></li>
 </ul>
