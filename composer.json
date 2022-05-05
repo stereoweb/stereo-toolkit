@@ -1,7 +1,7 @@
 {
     "name": "stereo/stereo-toolkit",
     "type": "wordpress-plugin",
-    "description": "Stereo plugin to handle 301 redirections, analytics & other sitewide pixels",
+    "description": "Wordpress plugin to handle 301 redirections, analytics & other sitewide pixels",
     "keywords": ["wordpress","plugin","seo"],
     "homepage": "https://www.stereo.ca/",
     "license": "0BSD",
