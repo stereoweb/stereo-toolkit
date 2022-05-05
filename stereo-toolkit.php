@@ -4,7 +4,7 @@
  * Description: Stereo plugin to handle redirections, site tags & more
  * Author: Stereo
  * Author URI: https://www.stereo.ca/
- * Version: 1.0.0
+ * Version: 1.0.1
  * License:     0BSD
  *
  * Copyright (c) 2022 Stereo
