@@ -4,7 +4,7 @@
  * Description: Stereo plugin to handle redirections, site tags & more
  * Author: Stereo
  * Author URI: https://www.stereo.ca/
- * Version: 1.0.1
+ * Version: 1.0.3
  * License:     0BSD
  *
  * Copyright (c) 2022 Stereo
@@ -21,12 +21,12 @@ if (!class_exists('ST_Toolkit')) {
 
     class ST_Toolkit
     {
-        var $version = "1.0.0";
+        var $version = "1.0.3";
 
         public function __construct()
         {
             add_action('init', [$this, 'init']);
-            add_filter('pre_handle_404',[$this, 'process_redirects'],1000,1); // Priority is 1000, so you can hook there BEFORE
+            add_action('set_404',[$this, 'process_redirects'],1000,1); // Priority is 1000, so you can hook there BEFORE
 
         }
 
