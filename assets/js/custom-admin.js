@@ -58,6 +58,11 @@ jQuery( function($){
         updateMeta($(this).attr('name'), $(this).val(), $(this).closest('tr').attr('data-id'));
     });
 
+	$('.stereo-form-meta-seo input, .stereo-form-meta-seo textarea').keyup(function(event){
+		const value = $(this).val();
+		$(this).parent().find('.count').html('count: '+value.length);
+	});
+
     const updateMeta = function( meta, value, post_id ) {
         const button = $(this);
         const data = {
