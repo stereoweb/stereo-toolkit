@@ -21,8 +21,8 @@
                     <th scope="col" class="manage-column">Meta description</th>
                     <th scope="col" class="manage-column">Facebook description</th>
                     <th scope="col" class="manage-column">Twitter description</th>
-                    <th scope="col" class="manage-column" width="105px">Facebook image</th>
-                    <th scope="col" class="manage-column" width="105px">Twitter image</th>
+                    <th scope="col" class="manage-column" width="105px"><?php if (defined('WPSEO_VERSION')) : ?>Facebook image<?php else:?>Social image<?php endif; ?></th>
+                    <?php if (defined('WPSEO_VERSION')) : ?><th scope="col" class="manage-column" width="105px">Twitter image</th><?php endif; ?>
                 </tr>
 	        </thead>
 	        <tbody id="the-list">
@@ -56,12 +56,14 @@
                         <a href="#" class="stereo-remove-fb-image" <?=$metas['facebook_image'] ? '': 'style="display:none;"'?>>Remove image</a>
                         <input type="hidden" name="facebook_image" value="">
                     </td>
+                    <?php if (defined('WPSEO_VERSION')) : ?>
                     <td>
                         <a href="#" class="button stereo-upload" <?=$metas['twitter_image'] ? 'style="display:none;"':''?>>Upload image</a>
                         <img style="max-width:100px; max-height:100px;<?=$metas['twitter_image']?'':'display:none;'?>" src="<?=$metas['twitter_image']?>">
                         <a href="#" class="stereo-remove-fb-image" <?=$metas['twitter_image'] ? '': 'style="display:none;"'?>>Remove image</a>
                         <input type="hidden" name="twitter_image" value="">
                     </td>
+                    <?php endif; ?>
                 </tr>
             <?php endwhile; ?>
             </tbody>

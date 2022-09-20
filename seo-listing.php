@@ -18,7 +18,7 @@ if (!class_exists('ST_SEO_Listing')) {
 
         public function add_admin_menu()
         {
-            if (defined('WPSEO_VERSION') /*|| defined('THE_SEO_FRAMEWORK_VERSION')*/) {
+            if (defined('WPSEO_VERSION') || defined('THE_SEO_FRAMEWORK_VERSION')) {
                 add_submenu_page(
                     'tools.php',
                     'SEO Listing',
@@ -91,16 +91,14 @@ if (!class_exists('ST_SEO_Listing')) {
                     $metas['twitter_image'] = $image;
                 }
             } else if (defined('THE_SEO_FRAMEWORK_VERSION')) {
-                // TODO : A VÉRIFIER
                 $metas = [
-                    'title' => get_post_meta($post_id, '_genesis_title', true),
-                    'description' => get_post_meta($post_id, '_genesis_description', true),
-                    'facebook_title' => get_post_meta($post_id, '_open_graph_title', true),
-                    'facebook_description' => get_post_meta($post_id, '_open_graph_description', true),
-                    'facebook_image' => get_post_meta($post_id, '_open_graph_image', true),
-                    'twitter_title' => get_post_meta($post_id, '_twitter_title', true),
-                    'twitter_description' => get_post_meta($post_id, '_twitter_description', true),
-                    'twitter_image' => get_post_meta($post_id, '_twitter_image', true),
+                    'title' => the_seo_framework()->get_title($post_id),
+                    'description' => the_seo_framework()->get_description($post_id),
+                    'facebook_title' => the_seo_framework()->get_open_graph_title($post_id),
+                    'facebook_description' => the_seo_framework()->get_open_graph_description($post_id),
+                    'facebook_image' => get_post_meta($post_id,'_social_image_url',true),
+                    'twitter_title' => the_seo_framework()->get_twitter_title($post_id),
+                    'twitter_description' => the_seo_framework()->get_twitter_description($post_id),
                 ];
             }
             return $metas;
@@ -154,16 +152,14 @@ if (!class_exists('ST_SEO_Listing')) {
                         update_post_meta($post_id, '_open_graph_description', $value);
                         break;
                     case 'facebook_image':
-                        update_post_meta($post_id, '_open_graph_image', wp_get_attachment_url($value));
+                        update_post_meta($post_id, '_social_image_id', $value);
+                        update_post_meta($post_id, '_social_image_url', wp_get_attachment_url($value));
                         break;
                     case 'twitter_title':
                         update_post_meta($post_id, '_twitter_title', $value);
                         break;
                     case 'twitter_description':
                         update_post_meta($post_id, '_twitter_description', $value);
-                        break;
-                    case 'twitter_image':
-                        update_post_meta($post_id, '_twitter_image', wp_get_attachment_url($value));
                         break;
                 }
             }
