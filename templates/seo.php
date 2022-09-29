@@ -3,6 +3,22 @@
         SEO Listing
     </h1>
 
+    <div class="tablenav top">
+
+        <div class="alignleft actions">
+            <?=__('Columns', 'stereo')?>: &nbsp;&nbsp;
+            <label for="fb-select">
+                <input name="fbmeta" id="fb-select" type="checkbox"  />
+                Facebook
+            </label>&nbsp;&nbsp;
+            <label for="tw-select">
+                <input name="twmeta" id="tw-select" type="checkbox" />
+                Twitter
+            </label>
+        </div>
+        <br class="clear">
+    </div>
+
     <nav class="nav-tab-wrapper">
         <?php foreach ($types as $post_type => $object) : ?>
             <a href="?page=stereo-seo-listing&tab=<?php echo $post_type; ?>" class="nav-tab <?php echo $tab == $post_type ? 'nav-tab-active' : ''; ?>">
@@ -19,10 +35,10 @@
                     <th scope="col" class="manage-column">Slug</th>
                     <th scope="col" class="manage-column">Titles</th>
                     <th scope="col" class="manage-column">Meta description</th>
-                    <th scope="col" class="manage-column">Facebook description</th>
-                    <th scope="col" class="manage-column">Twitter description</th>
-                    <th scope="col" class="manage-column" width="105px"><?php if (defined('WPSEO_VERSION')) : ?>Facebook image<?php else:?>Social image<?php endif; ?></th>
-                    <?php if (defined('WPSEO_VERSION')) : ?><th scope="col" class="manage-column" width="105px">Twitter image</th><?php endif; ?>
+                    <th scope="col" class="manage-column fbshow" style="display:none">Facebook description</th>
+                    <th scope="col" class="manage-column twshow" style="display:none">Twitter description</th>
+                    <th scope="col" class="manage-column fbshow" style="display:none" width="105px"><?php if (defined('WPSEO_VERSION')) : ?>Facebook image<?php else:?>Social image<?php endif; ?></th>
+                    <?php if (defined('WPSEO_VERSION')) : ?><th scope="col" class="manage-column twshow" style="display:none" width="105px">Twitter image</th><?php endif; ?>
                 </tr>
 	        </thead>
 	        <tbody id="the-list">
@@ -40,24 +56,24 @@
                         <label>
                             Title (<span class="count">count: <?=mb_strlen($metas['title'])?>)</span><input type="text" name="meta_title" value="<?=$metas['title']?>">
                         </label>
-                        <label>
+                        <label class="fbshow" style="display:none">
                             Facebook (<span class="count">count: <?=mb_strlen($metas['facebook_title'])?></span>)<input type="text" name="facebook_title" value="<?=$metas['facebook_title']?>">
                         </label>
-                        <label>
+                        <label class="twshow" style="display:none">
                             Twitter (<span class="count">count: <?=mb_strlen($metas['twitter_title'])?></span>)<input type="text" name="twitter_title" value="<?=$metas['twitter_title']?>">
                         </label>
                     </td>
                     <td><textarea name="meta_description" rows="7"><?=$metas['description']?></textarea><span class="count">count: <?=mb_strlen($metas['description'])?></span></td>
-                    <td><textarea name="facebook_description" rows="7"><?=$metas['facebook_description']?></textarea><span class="count">count: <?=mb_strlen($metas['facebook_description'])?></span></td>
-                    <td><textarea name="twitter_description" rows="7"><?=$metas['twitter_description']?></textarea><span class="count">count: <?=mb_strlen($metas['twitter_description'])?></span></td>
-                    <td>
+                    <td class="fbshow" style="display:none"><textarea name="facebook_description" rows="7"><?=$metas['facebook_description']?></textarea><span class="count">count: <?=mb_strlen($metas['facebook_description'])?></span></td>
+                    <td class="twshow" style="display:none"><textarea name="twitter_description" rows="7"><?=$metas['twitter_description']?></textarea><span class="count">count: <?=mb_strlen($metas['twitter_description'])?></span></td>
+                    <td class="fbshow" style="display:none">
                         <a href="#" class="button stereo-upload" <?=$metas['facebook_image'] ? 'style="display:none;"':''?>>Upload image</a>
                         <img style="max-width:100px; max-height:100px;<?=$metas['facebook_image']?'':'display:none;'?>" src="<?=$metas['facebook_image']?>">
                         <a href="#" class="stereo-remove-fb-image" <?=$metas['facebook_image'] ? '': 'style="display:none;"'?>>Remove image</a>
                         <input type="hidden" name="facebook_image" value="">
                     </td>
                     <?php if (defined('WPSEO_VERSION')) : ?>
-                    <td>
+                    <td class="twshow" style="display:none">
                         <a href="#" class="button stereo-upload" <?=$metas['twitter_image'] ? 'style="display:none;"':''?>>Upload image</a>
                         <img style="max-width:100px; max-height:100px;<?=$metas['twitter_image']?'':'display:none;'?>" src="<?=$metas['twitter_image']?>">
                         <a href="#" class="stereo-remove-fb-image" <?=$metas['twitter_image'] ? '': 'style="display:none;"'?>>Remove image</a>
@@ -70,3 +86,21 @@
         </table>
     </div>
 </div>
+<script>
+    //on #fb-select change, show/hide .fbshow
+    jQuery('#fb-select').on('change', function() {
+        if (jQuery(this).prop('checked') === true) {
+            jQuery('.fbshow').show();
+        } else {
+            jQuery('.fbshow').hide();
+        }
+    });
+    jQuery('#tw-select').on('change', function() {
+        if (jQuery(this).prop('checked') === true) {
+            jQuery('.twshow').show();
+        } else {
+            jQuery('.twshow').hide();
+        }
+    });
+
+</script>
